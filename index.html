@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+
+    <style>
+
+         #calculator{
+            width:230px;
+            height:370px;
+            border:1px solid grey;
+            margin:auto;
+         }
+
+         button{
+
+             display:inline-block;
+             width:50px;
+             height:50px;
+             margin:2px;
+          }
+
+         button.ac{
+
+             display:inline-block;
+             width:220px;
+             height:50px;
+             margin:2px;
+         }
+
+        input {
+            display:inline-block;
+            margin:2px;
+            margin-top:5px;
+            width:220px;
+            height:30px;
+            font-size: 14px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+  <div id="calculator">
+
+      <div>
+
+           <input type="text" name="input" id="input"  value="0" disabled/>
+
+      </div>
+
+      <div>
+
+          <div>
+              <button id="ac" onclick="handleKeyPress(this)">A/C</button>
+          </div>
+
+          <div>
+          <button id="number1" onclick="handleKeyPress(this)">1</button>
+          <button id="number2" onclick="handleKeyPress(this)">2</button>
+          <button id="number3" onclick="handleKeyPress(this)">3</button>
+          <button id="add" onclick="handleKeyPress(this)"> + </button>
+          </div>
+
+          <div>
+          <button id="number4" onclick="handleKeyPress(this)">4</button>
+          <button id="number5" onclick="handleKeyPress(this)">5</button>
+          <button id="number6" onclick="handleKeyPress(this)">6</button>
+          <button id="sub" onclick="handleKeyPress(this)"> - </button>
+          </div>
+
+          <div>
+          <button id="number7" onclick="handleKeyPress(this)">7</button>
+          <button id="number8" onclick="handleKeyPress(this)">8</button>
+          <button id="number9" onclick="handleKeyPress(this)">9</button>
+          <button id="mul" onclick="handleKeyPress(this)"> * </button>
+          </div>
+
+          <div>
+             <button id="number0" onclick="handleKeyPress(this)">0</button>
+             <button id="dot" onclick="handleKeyPress(this)">.</button>
+             <button id="mod" onclick="handleKeyPress(this)"> % </button>
+             <button id="div" onclick="handleKeyPress(this)"> / </button>
+          </div>
+
+          <div>
+
+             <button id="pow" onclick="handleKeyPress(this)"> ^ </button>
+             <button id="left-brac" onclick="handleKeyPress(this)"> ( </button>
+             <button id="right-brac" onclick="handleKeyPress(this)"> ) </button>
+             <button  id="eq" onclick="handleKeyPress(this)"> = </button>
+          </div>
+      </div>
+
+  </div>
+
+<script src="js/calculator.js"></script>
+
+<script>
+
+    var state = 0;
+
+    function handleKeyPress(element){
+        //alert(element.innerHTML);
+
+        var input = document.getElementById("input");
+
+        if(element.innerHTML.trim() == "A/C"){
+            input.value = "0";
+            state = 0;
+        }
+        else if(element.innerHTML.trim() == "=")
+        {
+            //input.value = eval(input.value);
+
+            input.value = evaluate(input.value);
+        } else{
+
+            if(state == 0 )
+                input.value = element.innerHTML;
+
+            else
+            input.value += element.innerHTML;
+
+            state = 1;
+        }
+
+
+        //if()
+    }
+
+</script>
+</body>
+</html>
