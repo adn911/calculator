@@ -19,6 +19,7 @@ function evaluate(expression) {
     for( var i=0; i<tokens.length; i++ ){
 
         var token = tokens[i].trim();
+
         console.log(token);
 
         if( isValue(token) )
@@ -50,7 +51,7 @@ function evaluate(expression) {
         {
             console.log("Right Parenthesis");
 
-            while( operatorStack[ operatorStack.length - 1 ] != "(" )
+            while( operatorStack.length > 0 && operatorStack[ operatorStack.length - 1 ] != "("   )
             {
                 valueStack.push( applyOperation( operatorStack.pop(),valueStack.pop(),valueStack.pop() ) );
             }
@@ -75,7 +76,16 @@ function evaluate(expression) {
 
 function getTokens(expression) {
 
-    return expression.split(/\s+/);
+    var tokens = expression.split(/\s+/);
+
+    for(var i=0;i<tokens.length;i++){
+
+        if(tokens[i] == " " || tokens[i] == ""){
+            tokens.splice(i,1);
+        }
+
+    }
+    return tokens;
 }
 
 function isValue(token) {
@@ -126,6 +136,8 @@ function applyOperation(operator, b, a) {
     } else if (operator == "%") {
         if (b == 0)
             throw "Cannot divide by zero";
+
+        console.log(a+" % "+b);
         return a % b;
     } else if (operator == "^")
         return Math.pow(a, b);
